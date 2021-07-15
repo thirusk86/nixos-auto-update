@@ -1,4 +1,4 @@
-import ./module.nix ({ name, description, serviceConfig }:
+import ./module.nix ({ name, description, serviceConfig, timerConfig }:
 
 {
   systemd.user.services.${name} = {
