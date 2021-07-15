@@ -45,7 +45,7 @@ with lib;
 	  timerConfig = {
 	    OnBootSec = "15m"; # first run 5min after boot up
 	    OnUnitActiveSec = "1w"; # run weekly
-	  }
+	  };
         }
       );
 }
