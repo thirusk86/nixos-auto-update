@@ -1,12 +1,12 @@
 import ./module.nix ({ name, description, serviceConfig, timerConfig }:
 
 {
-  systemd.user.services.${name} = {
+  systemd.services.${name} = {
     inherit description serviceConfig;
     wantedBy = [ "default.target" ];
   };
   
-  systemd.user.timers.${name} = {
+  systemd.timers.${name} = {
     inherit description timerConfig;
     wantedBy = [ "timers.target" ];
   };  
