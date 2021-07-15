@@ -25,14 +25,14 @@ with lib;
       cfg = config.services.nixos-auto-update;
       gitPath = "${cfg.gitPackage}/bin/git";
       nixFlakesPath = "${cfg.nixFlakesPackage}/bin/nix";
-	  nixRebuildPath = "${cfg.nixRebuildPackage}/bin/nix-rebuild";
+      nixRebuildPath = "${cfg.nixRebuildPackage}/bin/nix-rebuild";
       mkStartScript = name: pkgs.writeShellScript "${name}.sh" ''
         set -euo pipefail
-		PATH=${makeBinPath (with pkgs; [ git nix nix-rebuild ])}
+        PATH=${makeBinPath (with pkgs; [ git nix nix-rebuild ])}
         cd /etc/nixos/
-		${gitPath}/bin/git pull origin master
-		${nixFlakesPath}/bin/nix flake update '/etc/nixos/' -v
-		${nixRebuildPath}/bin/nixos-rebuild switch --flake '/etc/nixos/#nixtst' --impure	
+        ${gitPath}/bin/git pull origin master
+	${nixFlakesPath}/bin/nix flake update '/etc/nixos/' -v
+	${nixRebuildPath}/bin/nixos-rebuild switch --flake '/etc/nixos/#nixtst' --impure	
       '';
     in
       mkIf cfg.enable (
@@ -42,10 +42,10 @@ with lib;
           serviceConfig = {
             ExecStart = "${mkStartScript name}";
           };
-		  timerConfig = {
-		    OnBootSec = "15m"; # first run 5min after boot up
-	        OnUnitActiveSec = "1w"; # run weekly
-		  }
+	  timerConfig = {
+	    OnBootSec = "15m"; # first run 5min after boot up
+	    OnUnitActiveSec = "1w"; # run weekly
+	  }
         }
       );
 }
