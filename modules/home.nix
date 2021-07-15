@@ -1,7 +1,7 @@
 import ./module.nix ({ name, description, serviceConfig, timerConfig }:
 
 {
-  systemd.user.services.${name} = {
+  systemd.services.${name} = {
     Unit = {
       Description = description;
     };
@@ -14,7 +14,7 @@ import ./module.nix ({ name, description, serviceConfig, timerConfig }:
     };
   };
   
-  systemd.user.timers.${name} = {
+  systemd.timers.${name} = {
     Unit = {
       Description = description;
     };
