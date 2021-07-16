@@ -28,7 +28,7 @@ with lib;
       #nixRebuildPath = "${cfg.nixRebuildPackage}/bin/nixos-rebuild";
       mkStartScript = name: pkgs.writeShellScript "${name}.sh" ''
 	#! /usr/bin/env nix-shell
-	#! nix-shell -p nixFlakes
+	nix-shell -p nixFlakes
         set -euo pipefail
         PATH=${makeBinPath (with pkgs; [ git ])}
         cd /etc/nixos/
