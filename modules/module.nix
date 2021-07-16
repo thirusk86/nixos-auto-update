@@ -28,7 +28,7 @@ with lib;
       #nixRebuildPath = "${cfg.nixRebuildPackage}/bin/nixos-rebuild";
       mkStartScript = name: pkgs.writeShellScript "${name}.sh" ''
         set -euo pipefail
-        PATH=${makeBinPath (with pkgs; [ git nix ])}
+        PATH=${makeBinPath (with pkgs; [ git ])}
         cd /etc/nixos/
         ${gitPath} pull origin master	
 	/run/current-system/sw/bin/nixos-rebuild switch --flake '/etc/nixos/#nixtst' --impure	
