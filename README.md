@@ -1,4 +1,4 @@
-# Weekly service to auto update NixOS
+# Service to auto update NixOS weekly through GIT
 
 Experimental support for upadting the Nixos with the latest update from github repo.
 
@@ -29,11 +29,11 @@ Experimental support for upadting the Nixos with the latest update from github r
 }
 ```
 ### Enable the service
-systemctl --user enable nixos-auto-update.service
+systemctl enable nixos-auto-update.service
 
 ### Start the service
-systemctl --user start nixos-auto-update.service
+systemctl start nixos-auto-update.service
 
-### Restart
+### Restart the service
 
-The service can be restarted with `systemctl --user restart nixos-auto-update` or by rebooting the machine.
+The service can be restarted with `systemctl restart nixos-auto-update` or by rebooting the machine.
