@@ -14,10 +14,10 @@ with lib;
       #type = package;
       #default = pkgs.nixFlakes;
     #};
-    #nixRebuildPackage = mkOption {
-      #type = package;
-      #default = pkgs.nixos-rebuild;
-    #};	
+    nixRebuildPackage = mkOption {
+      type = package;
+      default = pkgs.nixos-rebuild;
+    };
   };
 
   config =
@@ -25,13 +25,14 @@ with lib;
       cfg = config.services.nixos-auto-update;
       gitPath = "${cfg.gitPackage}/bin/git";
       #nixFlakesPath = "${cfg.nixFlakesPackage}/bin/nix";
-      #nixRebuildPath = "${cfg.nixRebuildPackage}/bin/nixos-rebuild";
+      nixRebuildPath = "${cfg.nixRebuildPackage}/bin/nixos-rebuild";
       mkStartScript = name: pkgs.writeShellScript "${name}.sh" ''
         set -euo pipefail
         PATH=${makeBinPath (with pkgs; [ git ])}
         cd /etc/nixos/
-        ${gitPath} pull origin master	
-	/run/current-system/sw/bin/nixos-rebuild switch --flake '/etc/nixos/#nixtst' --impure	
+        ${gitPath} pull origin master
+        #/run/current-system/sw/bin/nixos-rebuild switch --flake '/etc/nixos/#nixtst' --impure
+	    ${nixRebuildPath} switch --flake '/etc/nixos/#nixtst' --impure
       '';
     in
       mkIf cfg.enable (
