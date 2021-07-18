@@ -1,7 +1,6 @@
 {
   inputs = {
-    #nixpkgs.url = "github:nixos/nixpkgs/nixos-21.05";
-    nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
+    nixpkgs.url = "github:nixos/nixpkgs/nixos-21.05";
   };
   description = "Auto update NixOS weekly";
   outputs = { self, nixpkgs }: {
