@@ -31,8 +31,8 @@ with lib;
         #PATH=${makeBinPath (with pkgs; [ git ])}
         cd /etc/nixos/
         ${gitPath} pull origin master
-        #/run/current-system/sw/bin/nixos-rebuild switch --flake '/etc/nixos/#nixtst' --impure
-	    ${nixRebuildPath} switch --flake '/etc/nixos/#nixtst' --impure
+        /run/current-system/sw/bin/nixos-rebuild switch --flake '/etc/nixos/#nixtst' --impure
+        #${nixRebuildPath} switch --flake '/etc/nixos/#nixtst' --impure
       '';
     in
       mkIf cfg.enable (
