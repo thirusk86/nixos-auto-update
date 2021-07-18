@@ -25,7 +25,7 @@ with lib;
       cfg = config.services.nixos-auto-update;
       gitPath = "${cfg.gitPackage}/bin/git";
       #nixFlakesPath = "${cfg.nixFlakesPackage}/bin/nix";
-      #nixRebuildPath = "${cfg.nixRebuildPackage}/bin/nixos-rebuild";
+      nixRebuildPath = "${cfg.nixRebuildPackage}/bin/nixos-rebuild";
       mkStartScript = name: pkgs.writeShellScript "${name}.sh" ''
         set -euo pipefail
         PATH=${makeBinPath (with pkgs; [ git ])}
