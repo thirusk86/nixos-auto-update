@@ -16,7 +16,7 @@ with lib;
     #};
     nixRebuildPackage = mkOption {
       type = package;
-      default = unstable.pkgs.nixos-rebuild;
+      default = pkgs.nixos-rebuild;
     };
   };
 
