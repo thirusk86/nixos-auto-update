@@ -8,7 +8,6 @@
     nixosModules = {
       system = import ./modules;
       homeManager = import ./modules/home.nix;
-
     };
   };
 }
