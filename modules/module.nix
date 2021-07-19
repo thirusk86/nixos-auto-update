@@ -32,8 +32,8 @@ with lib;
         export NIX_PATH="nixpkgs=/nix/var/nix/profiles/per-user/root/channels/nixos:nixos-config=/etc/nixos/configuration.nix"
         cd /etc/nixos/
         ${gitPath} pull origin master
-        /run/current-system/sw/bin/nixos-rebuild switch --flake '/etc/nixos/#nixtst' --impure
-        #${nixRebuildPath} switch --flake '/etc/nixos/#nixtst' --impure
+        #/run/current-system/sw/bin/nixos-rebuild switch --flake '/etc/nixos/#nixtst' --impure
+        ${config.system.build.nixos-rebuild}/bin/nixos-rebuild switch --flake '/etc/nixos/#nixtst' --impure
       '';
     in
     mkIf cfg.enable (
