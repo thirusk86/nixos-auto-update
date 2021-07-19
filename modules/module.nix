@@ -10,36 +10,25 @@ with lib;
       type = package;
       default = pkgs.git;
     };
-    #nixFlakesPackage = mkOption {
-    #type = package;
-    #default = pkgs.nixFlakes;
-    #};
-    nixRebuildPackage = mkOption {
-      type = package;
-      default = pkgs.nixos-rebuild;
-    };
   };
 
   config =
     let
       cfg = config.services.nixos-auto-update;
       gitPath = "${cfg.gitPackage}/bin/git";
-      #nixFlakesPath = "${cfg.nixFlakesPackage}/bin/nix";
-      nixRebuildPath = "${cfg.nixRebuildPackage}/bin/nixos-rebuild";
       mkStartScript = name: pkgs.writeShellScript "${name}.sh" ''
         set -euo pipefail
         PATH=${makeBinPath (with pkgs; [ git ])}
-        #export NIX_PATH="nixpkgs=/nix/var/nix/profiles/per-user/root/channels/nixos:nixos-config=/etc/nixos/configuration.nix"
+        export NIX_PATH="nixpkgs=/nix/var/nix/profiles/per-user/root/channels/nixos:nixos-config=/etc/nixos/configuration.nix"
         cd /etc/nixos/
         ${gitPath} pull origin master
-        #/run/current-system/sw/bin/nixos-rebuild switch --flake '/etc/nixos/#nixtst' --impure
         ${config.system.build.nixos-rebuild}/bin/nixos-rebuild switch --flake '/etc/nixos/#nixtst' --impure
       '';
     in
     mkIf cfg.enable (
       moduleConfig rec {
         name = "nixos-auto-update";
-        description = "Auto update NixOS weekly";
+        description = "Auto update NixOS onboot/weekly";
         serviceConfig = {
           ExecStart = "${mkStartScript name}";
         };
