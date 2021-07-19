@@ -28,7 +28,7 @@ with lib;
       nixRebuildPath = "${cfg.nixRebuildPackage}/bin/nixos-rebuild";
       mkStartScript = name: pkgs.writeShellScript "${name}.sh" ''
         set -euo pipefail
-        #PATH=${makeBinPath (with pkgs; [ git ])}
+        PATH=${makeBinPath (with pkgs; [ git ])}
         #export NIX_PATH="nixpkgs=/nix/var/nix/profiles/per-user/root/channels/nixos:nixos-config=/etc/nixos/configuration.nix"
         export NIX_PATH="nixos-config=/etc/nixos/configuration.nix"
         cd /etc/nixos/
