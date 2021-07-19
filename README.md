@@ -28,12 +28,19 @@ Experimental support for upadting the Nixos with the latest update from github r
   };
 }
 ```
-### Enable the service
-systemctl enable nixos-auto-update.service
+### Enable service in configuration.nix
+Add below lines in configuration.nix file
+```
+services = {
+  nixos-auto-update.enable = true;
+}
+```
+
+### Enable the service manually
+`systemctl enable nixos-auto-update.service`
 
 ### Start the service
-systemctl start nixos-auto-update.service
+`systemctl start nixos-auto-update.service`
 
 ### Restart the service
-
 The service can be restarted with `systemctl restart nixos-auto-update` or by rebooting the machine.
