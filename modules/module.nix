@@ -44,7 +44,7 @@ with lib;
           ExecStart = "${mkStartScript name}";
         };
         timerConfig = {
-          OnBootSec = "15m"; # first run 5min after boot up
+          OnBootSec = "1m"; # first run 5min after boot up
           OnUnitActiveSec = "1w"; # run weekly
         };
       }
