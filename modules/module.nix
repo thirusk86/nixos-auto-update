@@ -29,8 +29,7 @@ with lib;
       mkStartScript = name: pkgs.writeShellScript "${name}.sh" ''
         set -euo pipefail
         PATH=${makeBinPath (with pkgs; [ git ])}
-        #export NIX_PATH="nixpkgs=/nix/var/nix/profiles/per-user/root/channels/nixos:nixos-config=/etc/nixos/configuration.nix"
-        export NIX_PATH="nixpkgs=/nix/var/nix/profiles/per-user/root/channels/nixos"
+        export NIX_PATH="nixpkgs=/nix/var/nix/profiles/per-user/root/channels/nixos:nixos-config=/etc/nixos/configuration.nix"
         cd /etc/nixos/
         ${gitPath} pull origin master
         /run/current-system/sw/bin/nixos-rebuild switch --flake '/etc/nixos/#nixtst' --impure
